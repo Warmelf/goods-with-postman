@@ -64,6 +64,8 @@ let goods = [
 
 const express = require('express');
 const app = express();
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/good/:id', function (req, res) {
     const findedNumber = JSON.stringify(goods.find((good) => good.id == req.params.id));
@@ -86,8 +88,8 @@ app.get('/goods', function (req, res) {
 });
 
 app.post('/good', function (req, res) {
-    goods.push(req.params);
-    res.json(req.params);
+    goods.push(req.body);
+    res.json(req.body);
 });
 
 app.put('/good/:id', function (req, res) {
